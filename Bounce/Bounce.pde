@@ -1,43 +1,41 @@
-// Instead of a bunch of floats, we now just have two PVector variables.
-PVector location;
-PVector velocity;
+int rad = 60;        // Width of the shape
+float xpos, ypos;    // Starting position of shape    
 
-Point[] pointlist;
+float xspeed = 2.8;  // Speed of the shape
+float yspeed = 2.2;  // Speed of the shape
 
-class Point {
-  public int x, y;
-  public Point(int x_, int y_) { x = x_; y = y_; }
-}
+int xdirection = 1;  // Left or Right
+int ydirection = 1;  // Top to Bottom
 
-void setup() {
-  size(200,200);
-  smooth();
-  background(255);
-  location = new PVector(100,100);
-  velocity = new PVector(1,1);
-  pointlist[0] = new Point(10, 10);
-  pointlist[1] = new Point(100, 100);
-}
 
-void draw() {
+void setup() 
+{
+  size(640, 360);
   noStroke();
-  fill(255,10);
-  rect(0,0,width,height);
+  frameRate(30);
+  ellipseMode(RADIUS);
+  // Set the starting position of the shape
+  xpos = width/2;
+  ypos = height/2;
+}
+
+void draw() 
+{
+  background(102);
   
-  // Add the current speed to the location.
-  location.add(velocity);
-
-  // We still sometimes need to refer to the individual components of a PVector 
-  // and can do so using the dot syntax (location.x, velocity.y, etc.)
-  if ((location.x < pointlist[0].x) || (location.x > pointlist[1].x)) {
-    velocity.x = velocity.x * -1;
+  // Update the position of the shape
+  xpos = xpos + ( xspeed * xdirection );
+  ypos = ypos + ( yspeed * ydirection );
+  
+  // Test to see if the shape exceeds the boundaries of the screen
+  // If it does, reverse its direction by multiplying by -1
+  if (xpos > width-rad || xpos < rad) {
+    xdirection *= -1;
   }
-  if ((location.y < pointlist[0].y) || (location.y > pointlist[1].y)) {
-    velocity.y = velocity.y * -1;
+  if (ypos > height-rad || ypos < rad) {
+    ydirection *= -1;
   }
 
-  // Display circle at x location
-  stroke(0);
-  fill(175);
-  ellipse(location.x,location.y,16,16);
+  // Draw the shape
+  ellipse(xpos, ypos, rad, rad);
 }
