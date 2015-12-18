@@ -31,7 +31,7 @@ void drawshape(PVector[] pointlist) {
 
 void setup() {
   size(500, 500);
-  background(255);
+  background(100);
   smooth();
   
   pointlist = new PVector[100];
