@@ -8,6 +8,8 @@ final color HULL_FILL = #E6ECFF;
 
 PVector[] pointlist;
 PShape[] guardlist;
+PVector[] guardslopes;
+PVector[] guardlocs;
 int click_num = 0, click_num2 = 0;
 boolean draw_shape = true, first_point = true;
 
@@ -31,12 +33,15 @@ void drawshape(PVector[] pointlist) {
 }
 
 void setup() {
+  frameRate(60);
   size(500, 500);
   background(100);
   smooth();
   
   pointlist = new PVector[100];
   guardlist = new PShape[100];
+  guardslopes = new PVector[100];
+  guardlocs = new PVector[100];
 }
  
 void draw() {
@@ -50,6 +55,26 @@ void draw() {
   if (!draw_shape){
     for (int i = 0; i < click_num2; i++) {
       shape(guardlist[i]);
+      PVector start = guardlist[i].getVertex(0);
+      PVector end = guardlist[i].getVertex(1);
+      PVector m = guardslopes[i];
+      guardlocs[i].x += m.x/100;
+      guardlocs[i].y += m.y/100;
+      
+      if (start.y < end.y) {
+        if (guardlocs[i].y < start.y || guardlocs[i].y > end.y) {
+          guardslopes[i].x *= -1;
+          guardslopes[i].y *= -1;
+        }
+      }  
+      if (start.y > end.y) {
+        if (guardlocs[i].y > start.y || guardlocs[i].y < end.y) {
+          guardslopes[i].x *= -1;
+          guardslopes[i].y *= -1;
+        }
+      }
+      
+      ellipse(guardlocs[i].x, guardlocs[i].y, 10, 10);
     }
   }
 }
@@ -70,6 +95,11 @@ void mousePressed() {
   else {
     guardlist[click_num2].setVertex(0, mouseX, mouseY);
     guardlist[click_num2].setVisible(true);
+    
+    PVector u = guardlist[click_num2].getVertex(0);
+    PVector v = guardlist[click_num2].getVertex(1);
+    guardslopes[click_num2] = new PVector(v.x-u.x, v.y-u.y);
+    guardlocs[click_num2] = new PVector(mouseX, mouseY);
     click_num2++;
     first_point = true;
   }
