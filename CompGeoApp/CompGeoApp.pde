@@ -7,8 +7,9 @@ final color HULL_STROKE = #809FFF;
 final color HULL_FILL = #E6ECFF;
 
 PVector[] pointlist;
-int click_num = 0;
-boolean draw_shape = true;
+PShape[] guardlist;
+int click_num = 0, click_num2 = 0;
+boolean draw_shape = true, first_point = true;
 
 void drawpoint(PVector pt) {
   stroke(POINT_COLOR);
@@ -35,6 +36,7 @@ void setup() {
   smooth();
   
   pointlist = new PVector[100];
+  guardlist = new PShape[100];
 }
  
 void draw() {
@@ -45,12 +47,31 @@ void draw() {
     drawpoint(pointlist[i]);
     drawshape(pointlist);
   }
+  if (!draw_shape){
+    for (int i = 0; i < click_num2; i++) {
+      shape(guardlist[i]);
+    }
+  }
 }
  
 void mousePressed() {
   if (draw_shape) {
     pointlist[click_num] = new PVector(mouseX, mouseY);
     click_num++;
+  }
+  else if (first_point) {
+    guardlist[click_num2] = createShape();
+    guardlist[click_num2].beginShape();
+    guardlist[click_num2].vertex(0, 0);
+    guardlist[click_num2].vertex(mouseX, mouseY);
+    guardlist[click_num2].endShape();
+    first_point = false;
+  }
+  else {
+    guardlist[click_num2].setVertex(0, mouseX, mouseY);
+    guardlist[click_num2].setVisible(true);
+    click_num2++;
+    first_point = true;
   }
 }
 
