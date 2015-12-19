@@ -73,7 +73,6 @@ void draw() {
           guardslopes[i].y *= -1;
         }
       }
-      
       ellipse(guardlocs[i].x, guardlocs[i].y, 10, 10);
     }
   }
