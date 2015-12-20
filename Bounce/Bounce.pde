@@ -1,41 +1,108 @@
-int rad = 60;        // Width of the shape
-float xpos, ypos;    // Starting position of shape    
+/* Art gallery problem with moving guards */
 
-float xspeed = 2.8;  // Speed of the shape
-float yspeed = 2.2;  // Speed of the shape
+final int POINT_SIZE = 10;
+final color POINT_COLOR = #FFB380;
+final float HULL_SIZE = POINT_SIZE * 0.2;
+final color HULL_STROKE = #809FFF;
+final color HULL_FILL = #E6ECFF;
 
-int xdirection = 1;  // Left or Right
-int ydirection = 1;  // Top to Bottom
+PVector[] pointlist;
+PVector[][] guardlist;
+PVector[] guardslopes;
+PVector[] guardlocs;
+int click_num = 0, click_num2 = 0;
+boolean draw_shape = true, first_point = true;
 
-
-void setup() 
-{
-  size(640, 360);
-  noStroke();
-  frameRate(30);
-  ellipseMode(RADIUS);
-  // Set the starting position of the shape
-  xpos = width/2;
-  ypos = height/2;
+void drawpoint(PVector pt) {
+  stroke(POINT_COLOR);
+  strokeWeight(POINT_SIZE);
+  point(pt.x, pt.y);
 }
 
-void draw() 
-{
-  background(102);
-  
-  // Update the position of the shape
-  xpos = xpos + ( xspeed * xdirection );
-  ypos = ypos + ( yspeed * ydirection );
-  
-  // Test to see if the shape exceeds the boundaries of the screen
-  // If it does, reverse its direction by multiplying by -1
-  if (xpos > width-rad || xpos < rad) {
-    xdirection *= -1;
+void drawshape(PVector[] pointlist) {
+  stroke(HULL_STROKE);
+  strokeWeight(HULL_SIZE);
+ 
+  beginShape();
+  fill(HULL_FILL);
+  for (int i = 0; i < click_num; ++i) {
+    PVector pt = pointlist[i];
+    vertex(pt.x, pt.y);
   }
-  if (ypos > height-rad || ypos < rad) {
-    ydirection *= -1;
-  }
+  endShape(CLOSE);
+}
 
-  // Draw the shape
-  ellipse(xpos, ypos, rad, rad);
+void setup() {
+  frameRate(60);
+  size(500, 500);
+  background(100);
+  smooth();
+  
+  pointlist = new PVector[100];
+  guardlist = new PVector[100][2];
+  guardslopes = new PVector[100];
+  guardlocs = new PVector[100];
+}
+ 
+void draw() {
+  rect(0,0,width,height);
+  background(255);
+
+  for (int i = 0; i < click_num; i++) {
+    drawpoint(pointlist[i]);
+    drawshape(pointlist);
+  }
+  if (!draw_shape){
+    for (int i = 0; i < click_num2; i++) {
+      line(guardlist[i][0].x, guardlist[i][0].y, guardlist[i][1].x, guardlist[i][1].y);
+      PVector start = guardlist[i][0];
+      PVector end = guardlist[i][1];
+      PVector m = guardslopes[i];
+      guardlocs[i].x += m.x/100;
+      guardlocs[i].y += m.y/100;
+      
+      if (start.y < end.y) {
+        if (guardlocs[i].y < start.y || guardlocs[i].y > end.y) {
+          guardslopes[i].x *= -1;
+          guardslopes[i].y *= -1;
+        }
+      }  
+      if (start.y > end.y) {
+        if (guardlocs[i].y > start.y || guardlocs[i].y < end.y) {
+          guardslopes[i].x *= -1;
+          guardslopes[i].y *= -1;
+        }
+      }
+      ellipse(guardlocs[i].x, guardlocs[i].y, 10, 10);
+    }
+  }
+}
+ 
+void mousePressed() {
+  if (draw_shape) {
+    pointlist[click_num] = new PVector(mouseX, mouseY);
+    click_num++;
+  }
+  else if (first_point) {
+    guardlist[click_num2][0] = new PVector(mouseX, mouseY);
+    first_point = false;
+  }
+  else {
+    guardlist[click_num2][1] = new PVector(mouseX, mouseY);
+    
+    PVector u = guardlist[click_num2][0];
+    PVector v = guardlist[click_num2][1];
+    guardslopes[click_num2] = new PVector(v.x-u.x, v.y-u.y);
+    guardlocs[click_num2] = new PVector(mouseX, mouseY);
+    click_num2++;
+    first_point = true;
+  }
+}
+
+void keyPressed() {
+ switch (key) {
+   case ' ':
+     draw_shape = false;
+     break;
+ }
 }
