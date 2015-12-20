@@ -84,7 +84,7 @@ void mousePressed() {
     click_num++;
   }
   else if (first_point) {
-    //guardlist[click_num2] = createShape();
+    guardlist[click_num2] = createShape();
     guardlist[click_num2].beginShape();
     guardlist[click_num2].vertex(0, 0);
     guardlist[click_num2].vertex(mouseX, mouseY);

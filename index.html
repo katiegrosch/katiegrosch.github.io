@@ -11,15 +11,23 @@
 <p>Here I will explain the art gallery problem - that is, using a set of points whose visibility region completely covers a polygon. I will then look at the extension of using mobile guards to reduce the number necessary to cover the gallery.</p>
 </div>
 
-<div id="section">
-<h1>Theory</h1>
-<p>In the general case of the art gallery problem, points (guards) are placed in stationary position throughout a polygon (an art gallery). The problem is how many guards you need an where to put them to achieve full coverage of the region.</p>
+<div id="explanation">
+<h1>The Art Gallery Problem</h1>
+<p>The art gallery problem is a well-studied problem in computational geometry. In the general case of the art gallery problem, points (guards) are placed in stationary position throughout a simple polygon (an art gallery). The problem is how many guards you need and where to put them to achieve full coverage of the region.</p>
+
+<p>Below, we can see two examples: in Example 1, the art gallery is completely coverd by the guards. Every point in the art gallery can be seen. In Example 2, the art gallery is not covered. Point p is not in the visibility region of any guard.</p>
+
+<img src="VisibilityRegion"></img>
+<img src="VisibilityRegion"></img>
+
+<h1>Moving Guards</h1>
 <p>In this variant of the art gallery problem, we modify the power of the guard. Each guard is permitted to "patrol" an interior line segment.</p>
 <p>Let s be a line segment completely contained in the polygon. Then a point p in the polygon is said to be seen by s (covered by s) if there is a point x on the line such that the segment xp is completely contained in the polygon.</p>
 <p>A covering by mobile guards induces a partition into edge-visible polygons.</p>
 <p>Mobile guards are more powerful than stationary guards: only three-quarters as many are needed, in both general and orthogonal polygons. Below, you can see that the the second column is 3/4 times the first. Moreover, orthogonal polygons are three-quarters easier to cover than general polygons: the second row is 3/4 times the first.</p>
 </div>
 
+<div id="table">
 <h5>Number of Guards Necessary</h5>
 <table border="1">
 <tr>
@@ -38,12 +46,15 @@
 <td>(3n+4)/16</td>
 </tr>
 </table>
+</div>
 
+<div id="app">
 <h1>Set Your Own Guards</h1>
 <p>Use the application below to see what different guarding patterns would look like.</p>
 <p>Click to start building a polygon, and hit the space bar when you're done. Then, build guard paths by clicking where you want the endpoints of the patrol route.</p>
 
 <canvas data-processing-sources="Bounce/Bounce.pde"></canvas>
+</div>
 
 <div id="footer">
 <br>
