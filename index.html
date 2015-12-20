@@ -31,7 +31,7 @@
 </div>
 
 <div id="table">
-<h5>Number of Guards Necessary</h5>
+<h4>Number of Guards Necessary</h4>
 <table border="1">
 <tr>
 <th></th>
@@ -61,6 +61,15 @@
 <img src="Necessary.png"></img>
 
 <h4>Sufficient</h4>
+
+<p>Proving that n/4 guards suffices is an inductive proof. Basically, what we do is show that n/4 guards suffices if a guard's path can only be along a diagonal of the triangulation graph T of the polygon. Since these triangulation diagonal guards are special cases of diagonal guards, and diagonal guards are special cases of line guards, we have the n/4 bound for any moving guards.</p>
+
+<p>First we need to establish a basic manipulation of our art gallery called an edge contraction. The contraction of an edge in the art gallery alters its triangulation graph. It takes the two endpoints of the edge we're contracting and "squashes" them together into one node.</p>
+
+<p>Below, you can see a triangulation graph of a polygon that has had edge e squashed.</p>
+
+<img src="Squashing.png"></img>
+<img src="Squashing2.png"></img>
 
 </div>
 
