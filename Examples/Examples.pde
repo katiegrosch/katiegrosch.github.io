@@ -24,7 +24,6 @@ void drawshape(PVector[] pointlist) {
   strokeWeight(HULL_SIZE);
  
   beginShape();
-  fill(HULL_FILL);
   for (int i = 0; i < click_num; ++i) {
     PVector pt = pointlist[i];
     vertex(pt.x, pt.y);

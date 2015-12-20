@@ -9,6 +9,8 @@
 
 <div id="intro">
 <p>Here I will explain the art gallery problem - that is, using a set of points whose visibility region completely covers a polygon. I will then look at the extension of using mobile guards to reduce the number necessary to cover the gallery.</p>
+
+<p>Much of this material comes from Joseph O'Rourke's book Art Gallery Theorems and Algorithms (Oxford University Press 1987).</p>
 </div>
 
 <div id="explanation">
@@ -84,6 +86,8 @@
 <img src="Diagonal.png"></img>
 
 <p>To prove this, choose a diagonal of T that separates off a minimum number of polygon edges that is at least 5. The diagonal supports a triangle whose apex is between vertices 0 and k in the numbering below. Since k is minimal, t must be at least 4 and k-t must be less than or equal to 4. Adding these together, we see that k must be less than or equal to 8. So we can split off 8 vertices from the triangulation.</p>
+
+<p>With this result, the rest of the proof is just case analysis of values of k between 5 and 8, showing that each value of k can be guarded with at most n/4 guards.</p>
 
 </div>
 
