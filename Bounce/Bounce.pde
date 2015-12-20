@@ -47,7 +47,7 @@ void setup() {
 void draw() {
   background(255);
   noFill();
-  rect(0,0,width,height);
+  rect(0,0,width-1,height-1);
 
   for (int i = 0; i < click_num; i++) {
     drawpoint(pointlist[i]);

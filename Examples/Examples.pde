@@ -29,7 +29,7 @@ void drawshape(PVector[] pointlist) {
     PVector pt = pointlist[i];
     vertex(pt.x, pt.y);
   }
-  endShape(CLOSE);
+  endShape();
 }
 
 void setup() {
