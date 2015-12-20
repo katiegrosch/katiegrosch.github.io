@@ -1,15 +1,17 @@
 /* Art gallery problem with moving guards */
 
-final int POINT_SIZE = 15;
+final int POINT_SIZE = 10;
 final color POINT_COLOR = #FFB380;
 final float HULL_SIZE = POINT_SIZE * 0.2;
 final color HULL_STROKE = #809FFF;
 final color HULL_FILL = #E6ECFF;
 
 PVector[] pointlist;
-PVector[] guardlist;
+PVector[][] guardlist;
+PVector[] guardslopes;
+PVector[] guardlocs;
 int click_num = 0, click_num2 = 0;
-boolean draw_shape = true;
+boolean draw_shape = true, first_point = true;
 
 void drawpoint(PVector pt) {
   stroke(POINT_COLOR);
@@ -37,20 +39,24 @@ void setup() {
   smooth();
   
   pointlist = new PVector[100];
-  guardlist = new PVector[100];
+  guardlist = new PVector[100][2];
+  guardslopes = new PVector[100];
+  guardlocs = new PVector[100];
 }
  
 void draw() {
-  rect(0,0,width,height);
   background(255);
+  noFill();
+  rect(0,0,width,height);
 
   for (int i = 0; i < click_num; i++) {
     drawpoint(pointlist[i]);
     drawshape(pointlist);
   }
   if (!draw_shape){
-      for (int i = 0; i < click_num2; i++) {
-        drawpoint(guardlist[i]);
+    for (int i = 0; i < click_num2; i++) {
+      line(guardlist[i][0].x, guardlist[i][0].y, guardlist[i][1].x, guardlist[i][1].y);
+      
     }
   }
 }
@@ -60,9 +66,19 @@ void mousePressed() {
     pointlist[click_num] = new PVector(mouseX, mouseY);
     click_num++;
   }
+  else if (first_point) {
+    guardlist[click_num2][0] = new PVector(mouseX, mouseY);
+    first_point = false;
+  }
   else {
-    guardlist[click_num2] = new PVector(mouseX, mouseY);
+    guardlist[click_num2][1] = new PVector(mouseX, mouseY);
+    
+    PVector u = guardlist[click_num2][0];
+    PVector v = guardlist[click_num2][1];
+    guardslopes[click_num2] = new PVector(v.x-u.x, v.y-u.y);
+    guardlocs[click_num2] = new PVector(mouseX, mouseY);
     click_num2++;
+    first_point = true;
   }
 }
 
