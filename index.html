@@ -66,12 +66,18 @@
 
 <p>First we need to establish a basic manipulation of our art gallery called an edge contraction. The contraction of an edge in the art gallery alters its triangulation graph. It takes the two endpoints of the edge we're contracting and "squashes" them together into one node.</p>
 
-<p>Below, you can see a triangulation graph of a polygon that has had edge e squashed.</p>
+<p>Below, you can see a triangulation graph T of a polygon P. In the next three pictures, we "squash" edge e. The new triangulation, T', is the triangulation of some polygon P'.</p>
 
 <img src="Squashing2.png"></img>
 <img src="Squashing.png"></img>
+
+<p>Now we have the new triangulation, T'.</p>
+
 <img src="Squashing3.png"></img>
 
+<p>Now, suppose we place a guard on a triangulation diagonal of P so that one of his path endpoints is at an endpoint of e. Then that edge can be squashed out for guard coverage calculations. More formally, if f(n) triangulation diagonal guards are sufficient for an n-node triangulation, then a guard placed at an endpoint of an edge e means you only need f(n-1) guard to guard the rest of the polygon.</p>
+
+<p>Next we establish that n/4 guards is sufficient for values of n between 4 and 10.</p>
 
 </div>
 
