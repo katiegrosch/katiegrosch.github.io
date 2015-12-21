@@ -22,13 +22,26 @@ void drawpoint(PVector pt) {
 void drawshape(PVector[] pointlist) {
   stroke(HULL_STROKE);
   strokeWeight(HULL_SIZE);
- 
+
   beginShape();
-  fill(HULL_FILL);
   for (int i = 0; i < click_num; ++i) {
     PVector pt = pointlist[i];
     vertex(pt.x, pt.y);
   }
+  endShape();
+}
+
+void endshape(PVector[] pointlist) {
+  stroke(HULL_STROKE);
+  strokeWeight(HULL_SIZE);
+  
+  fill(HULL_FILL);
+  beginShape();
+  for (int i = 0; i < click_num; ++i) {
+    PVector pt = pointlist[i];
+    vertex(pt.x, pt.y);
+  }
+  vertex(pointlist[0].x, pointlist[0].y);
   endShape(CLOSE);
 }
 
@@ -54,6 +67,7 @@ void draw() {
     drawshape(pointlist);
   }
   if (!draw_shape){
+    endshape(pointlist);
     for (int i = 0; i < click_num2; i++) {
       line(guardlist[i][0].x, guardlist[i][0].y, guardlist[i][1].x, guardlist[i][1].y);
       PVector start = guardlist[i][0];
@@ -104,6 +118,7 @@ void keyPressed() {
  switch (key) {
    case ' ':
      draw_shape = false;
+     endshape(pointlist);
      break;
  }
 }

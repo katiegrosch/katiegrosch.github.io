@@ -17,10 +17,14 @@
 <h1>The Art Gallery Problem</h1>
 <p>The art gallery problem is a well-studied problem in computational geometry. In the general case of the art gallery problem, points (guards) are placed in stationary position throughout a simple polygon (an art gallery). The problem is how many guards you need and where to put them to achieve full coverage of the region.</p>
 
-<p>Below, we can see two examples: in Example 1, the art gallery is completely coverd by the guards. Every point in the art gallery can be seen. In Example 2, the art gallery is not covered. Point s is not in the visibility region of any guard.</p>
+<p>Below, we can see two examples: in Example 1, the art gallery is completely coverd by the guards. Every point in the art gallery can be seen by one of more of the guards A, B, and C.</p>
 
-<img src="InVisibilityRegion.png"></img>
+<p>In Example 2, the art gallery is not covered. Point s is not in the visibility region of any guard. In fact, any point that is outside of the red and pink colored regions is invisible to both guards.</p>
+
+<p>You can think of the visibility region of a guard as the collection of all points in the polygon where you can draw a line between the point and the guard, and have that line be completely contained within the polygon.</p>
+
 <img src="VisibilityRegion.png"></img>
+<img src="InVisibilityRegion.png"></img>
 
 <h1>Moving Guards</h1>
 <p>In this variant of the art gallery problem, we modify the power of the guard. Each guard is permitted to "patrol" an interior line segment.</p>
@@ -28,7 +32,6 @@
 
 <img src="Movement.png"></img>
 
-<p>A covering by mobile guards induces a partition into edge-visible polygons.</p>
 <p>Mobile guards are more powerful than stationary guards: only three-quarters as many are needed, in both general and orthogonal polygons. Below, you can see that the the second column is 3/4 times the first. Moreover, orthogonal polygons are three-quarters easier to cover than general polygons: the second row is 3/4 times the first.</p>
 </div>
 
@@ -55,10 +58,13 @@
 
 <div id="proofs">
 <h1>Proof of the n/4 upper bound</h1>
+
+<p>Before I go into the n/4 bound, it's helpful to get some intuition about the n/3 bound for stationary guards. Steve Fisk proved this with a three-coloring argument: The polygon is triangulated, and the verticies are three-colored. Then, any color subset of the guards forms a valid guard set, hence, the n/3 bound. </p>
+
 <p>We want to show that n/4 is the upper bound for the number of mobile guards necessary to cover a polygon. First we will show that n/4 guards is necessary, and then we will prove that it is sufficient.</p>
 
 <h4>Necessary</h4>
-<p>This is actually the easy part of the proof. The picture below gives a polygon where n/4 mobile guards are necessary to cover the area.</p>
+<p>This is actually the easy part of the proof, and it defines how many guards we need in the worst case. The picture below gives a polygon where n/4 mobile guards are necessary to cover the area, because we can't do it with any fewer.</p>
 
 <img src="Necessary.png"></img>
 
@@ -94,9 +100,11 @@
 <div id="app">
 <h1>Set Your Own Guards</h1>
 <p>Use the application below to see what different guarding patterns would look like.</p>
-<p>Click to start building a polygon, and hit the space bar when you're done. Then, build guard paths by clicking where you want the endpoints of the patrol routes.</p>
+<p>Click to start building a polygon (it only accepts new edges that don't intersect any existing edges), and hit the space bar when you're done. Then, build guard paths by clicking where you want the endpoints of the patrol routes.</p>
 
-<canvas data-processing-sources="Bounce/Bounce.pde"></canvas>
+<p>Usage note: When you hit the space bar to finish the polygon, it will only close and fill in if the last line segment doesn't intersect any of the others (making a non-simple polygon. If finishing the polygon would make it non-simple, it just lets you keep making points.</p>
+
+<canvas data-processing-sources="ArtGalleryApp/ArtGalleryApp.pde"></canvas>
 </div>
 
 <div id="footer">
