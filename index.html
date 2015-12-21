@@ -100,9 +100,9 @@
 <div id="app">
 <h1>Set Your Own Guards</h1>
 <p>Use the application below to see what different guarding patterns would look like.</p>
-<p>Click to start building a polygon (it only accepts new edges that don't intersect any existing edges), and hit the space bar when you're done. Then, build guard paths by clicking where you want the endpoints of the patrol routes.</p>
+<p>Click to start building a polygon, and hit the space bar when you're done. Then, build guard paths by clicking where you want the endpoints of the patrol routes.</p>
 
-<p>Usage note: When you hit the space bar to finish the polygon, it will only close and fill in if the last line segment doesn't intersect any of the others (making a non-simple polygon. If finishing the polygon would make it non-simple, it just lets you keep making points.</p>
+<p>Usage note: When you hit the space bar to finish the polygon, it will only close and fill in if the last line segment doesn't intersect any of the others (making a non-simple polygon. If finishing the polygon would make it non-simple, it just lets you keep making points. However, it doesn't currently check if any of the other edges make the polygon non-simple, so just don't do that.</p>
 
 <canvas data-processing-sources="ArtGalleryApp/ArtGalleryApp.pde"></canvas>
 </div>
