@@ -126,21 +126,21 @@ void mousePressed() {
   if (draw_shape) {
     boolean intersection = false;
     
-    for (int i = 0; i < click_num - 3; i++) {
-      PVector p1 = pointlist[click_num - 2];
-      PVector q1 = pointlist[click_num - 1];
-      PVector p2 = pointlist[i];
-      PVector q2 = pointlist[i + 1];
-      int o1 = orientation(p1, q1, p2);
-      int o2 = orientation(p1, q1, q2);
-      int o3 = orientation(p2, q2, p1);
-      int o4 = orientation(p2, q2, q1);
+    //for (int i = 0; i < click_num - 3; i++) {
+    //  PVector p1 = pointlist[click_num - 2];
+    //  PVector q1 = pointlist[click_num - 1];
+    //  PVector p2 = pointlist[i];
+    //  PVector q2 = pointlist[i + 1];
+    //  int o1 = orientation(p1, q1, p2);
+    //  int o2 = orientation(p1, q1, q2);
+    //  int o3 = orientation(p2, q2, p1);
+    //  int o4 = orientation(p2, q2, q1);
      
-      if (o1 != o2 && o3 != o4) {
-            intersection = true;
-            print("found intersection");
-      }
-    }
+    //  if (o1 != o2 && o3 != o4) {
+    //        intersection = true;
+    //        print("found intersection");
+    //  }
+    //}
     if (!intersection) {
       pointlist[click_num] = new PVector(mouseX, mouseY);
       click_num++;
