@@ -33,7 +33,7 @@
 <img src="Stationary.png"></img>
 <img src="Movement.png"></img>
 
-<p>Mobile guards are more powerful than stationary guards: only three-quarters as many are needed, in both general and orthogonal polygons. Below, you can see that the the second column is 3/4 times the first. Moreover, orthogonal polygons are three-quarters easier to cover than general polygons: the second row is 3/4 times the first.</p>
+<p>Mobile guards are more powerful than stationary guards: only three-quarters as many are needed in the worst case, in both general and orthogonal polygons. Below, you can see that the the second column is 3/4 times the first. Moreover, orthogonal polygons are three-quarters easier to cover than general polygons: the second row is 3/4 times the first.</p>
 </div>
 
 <div id="table">
@@ -60,9 +60,13 @@
 <div id="proofs">
 <h1>Proof of the n/4 upper bound</h1>
 
-<p>Before I go into the n/4 bound, it's helpful to get some intuition about the n/3 bound for stationary guards. Steve Fisk proved this with a three-coloring argument: The polygon is triangulated, and the verticies are three-colored. Then, any color subset of the guards forms a valid guard set, hence, the n/3 bound. </p>
+<p>Before I go into the n/4 bound, it's helpful to get some intuition about the n/3 bound for stationary guards. Steve Fisk proved this with a three-coloring argument: The polygon is triangulated, and the vertices are three-colored. Then, any color subset of the guards forms a valid guard set, hence, choosing the color set with the fewest appearences in the triangulation gives the n/3 bound. </p>
 
-<p>We want to show that n/4 is the upper bound for the number of mobile guards necessary to cover a polygon. First we will show that n/4 guards is necessary, and then we will prove that it is sufficient.</p>
+<p>As far as n/3 guards being necessary, the below picture gives a worst-case scenario where we need that many guards to cover the shape.</p>
+
+<img src="Necessary2.png"></img>
+
+<p>We want to show that n/4 is the upper bound for the number of mobile guards necessary to cover a polygon. First we will show that n/4 guards are necessary, and then we will prove that it is sufficient.</p>
 
 <h4>Necessary</h4>
 <p>This is actually the easy part of the proof, and it defines how many guards we need in the worst case. The picture below gives a polygon where n/4 mobile guards are necessary to cover the area, because we can't do it with any fewer.</p>
@@ -71,7 +75,7 @@
 
 <h4>Sufficient</h4>
 
-<p>Proving that n/4 guards suffices is an inductive proof. Basically, what we do is show that n/4 guards suffices if a guard's path can only be along a diagonal of the triangulation graph T of the polygon. Since these triangulation diagonal guards are special cases of diagonal guards, and diagonal guards are special cases of line guards, we have the n/4 bound for any moving guards.</p>
+<p>Proving that n/4 guards suffice is an inductive proof. Basically, what we do is show that n/4 guards suffices if a guard's path can only be along a diagonal of the triangulation graph T of the polygon. Since these triangulation diagonal guards are special cases of diagonal guards, and diagonal guards are special cases of line guards, we have the n/4 bound for any moving guards.</p>
 
 <p>First we need to establish a basic manipulation of our art gallery called an edge contraction. The contraction of an edge in the art gallery alters its triangulation graph. It takes the two endpoints of the edge we're contracting and "squashes" them together into one node.</p>
 
@@ -93,7 +97,7 @@
 
 <p>Let x be the node that replaced edge e. Suppose no guard is placed at x in T'. Then the same guard placements will dominate T' that worked for T, since the guard at u in the untriangulated version dominated the triangle with edge e, and the remaining triangles have dominated versions in T'.</p>
 
-<p>Next we establish that n/4 guards is sufficient for values of n between 4 and 10. With n values this small, it is easy to see that the number of possible triangulations is small, and they all guarantee that one or two guards is sufficient. Below I present two of the cases as samples.</p>
+<p>Next we establish that n/4 guards are sufficient for values of n between 4 and 10. With n values this small, it is easy to see that the number of possible triangulations is small, and they all guarantee that one or two guards are sufficient. Below I present two of the cases as samples.</p>
 
 <h6>n = 5</h6>
 <p>There are only 5 distinct triangulations of a polygon with n vertices, and only one reflex angle is possible. With a convex polygon, obviously one guard works. For a polygon with a reflex angle, placing one endpoint at the reflex angle gives a one-guard covering.</p>
@@ -105,7 +109,7 @@
 
 <img src="Diagonal.png"></img>
 
-<p>To prove this, choose a diagonal of T that separates off a minimum number of polygon edges that is at least 5. The diagonal supports a triangle whose apex is between vertices 0 and k in the numbering below. Since k is minimal, t must be at least 4 and k-t must be less than or equal to 4. Adding these together, we see that k must be less than or equal to 8. So we can split off 8 vertices from the triangulation.</p>
+<p>To prove this, choose a diagonal d of T (shown above) that separates off a minimum number of polygon edges that is at least 5. The diagonal supports a triangle (that by definition is part of T) whose apex is between vertices 0 and k. Since k is minimal, t must be at least 4 and k-t must be less than or equal to 4. Adding these together, we see that k must be less than or equal to 8. So we can split off 8 vertices from the triangulation.</p>
 
 <p>With this result, the rest of the proof is just case analysis of values of k between 5 and 8, showing that each value of k can be guarded with at most n/4 guards.</p>
 
