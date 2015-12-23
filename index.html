@@ -10,16 +10,16 @@
 <div id="intro">
 <p>Here I will explain the art gallery problem - that is, using a set of points whose visibility region completely covers a polygon. I will then look at the extension of using mobile guards to reduce the number necessary to cover the gallery.</p>
 
-<p>Much of this material comes from Joseph O'Rourke's book Art Gallery Theorems and Algorithms (Oxford University Press 1987). Click <a href="http://cs.smith.edu/~orourke/books/ArtGalleryTheorems/art.html">here</a> to read his full text.</p>
+<p>Much of this material comes from Joseph O'Rourke's book Art Gallery Theorems and Algorithms (Oxford University Press 1987). Click <a href="http://cs.smith.edu/~orourke/books/ArtGalleryTheorems/art.html">here</a> to read his full text. His mobile guards section is in <a href="http://cs.smith.edu/~orourke/books/ArtGalleryTheorems/Art_Gallery_Chapter_3.pdf">Chapter Three</a></p>
 </div>
 
 <div id="explanation">
 <h1>The Art Gallery Problem</h1>
 <p>The art gallery problem is a well-studied problem in computational geometry. In the general case of the art gallery problem, points (guards) are placed in stationary position throughout a simple polygon (an art gallery). The problem is how many guards you need and where to put them to achieve full coverage of the region.</p>
 
-<p>Below, we can see two examples: in Example 1, the art gallery is completely coverd by the guards. Every point in the art gallery can be seen by one of more of the guards A, B, and C.</p>
+<p>Below, we can see two examples: in Example 1, the art gallery is completely coverd by the guards. Every point in the art gallery can be seen by one of more of the guards A, B, and C, and D.</p>
 
-<p>In Example 2, the art gallery is not covered. Point s is not in the visibility region of any guard. In fact, any point that is outside of the red and pink colored regions is invisible to both guards.</p>
+<p>In Example 2, the art gallery is not covered. The yellow point is not in the visibility region of any guard. In fact, any point that is outside of the red and pink colored regions is invisible to both guards.</p>
 
 <p>You can think of the visibility region of a guard as the collection of all points in the polygon where you can draw a line between the point and the guard, and have that line be completely contained within the polygon.</p>
 
@@ -28,8 +28,9 @@
 
 <h1>Moving Guards</h1>
 <p>In this variant of the art gallery problem, we modify the power of the guard. Each guard is permitted to "patrol" an interior line segment.</p>
-<p>Let s be a line segment completely contained in the polygon. Then a point p in the polygon is said to be seen by s (covered by s) if there is a point x on the line such that the segment xp is completely contained in the polygon. Below is an art gallery completely covered by two mobile guards.</p>
+<p>Let s be a line segment completely contained in the polygon. Then a point p in the polygon is said to be seen by s (covered by s) if there is a point x on the line such that the segment xp is completely contained in the polygon. Below is an art gallery completely covered by two mobile guards. In this example, three stationary guards would be needed, but only two mobile guards can do the job.</p>
 
+<img src="Stationary.png"></img>
 <img src="Movement.png"></img>
 
 <p>Mobile guards are more powerful than stationary guards: only three-quarters as many are needed, in both general and orthogonal polygons. Below, you can see that the the second column is 3/4 times the first. Moreover, orthogonal polygons are three-quarters easier to cover than general polygons: the second row is 3/4 times the first.</p>
