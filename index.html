@@ -92,7 +92,13 @@
 
 <p>Let x be the node that replaced edge e. Suppose no guard is placed at x in T'. Then the same guard placements will dominate T' that worked for T, since the guard at u in the untriangulated version dominated the triangle with edge e, and the remaining triangles have dominated versions in T'.</p>
 
-<p>Next we establish that n/4 guards is sufficient for values of n between 4 and 10. With n values this small, it is easy to see that the number of possible triangulations is small, and they all guarantee that one or two guards is sufficient.</p>
+<p>Next we establish that n/4 guards is sufficient for values of n between 4 and 10. With n values this small, it is easy to see that the number of possible triangulations is small, and they all guarantee that one or two guards is sufficient. Below I present two of the cases as samples.</p>
+
+<h6>n = 5</h6>
+<p>There are only 5 distinct triangulations of a polygon with n vertices, and only one reflex angle is possible. With a convex polygon, obviously one guard works. For a polygon with a reflex angle, placing one endpoint at the reflex angle gives a one-guard covering.</p>
+
+<h6>n = 7</h6>
+<p>Let d be an arbitrary internal diagonal. Then this partitions the edges into either 2+5 or 3+4. In either case, a diagonal between any two reflex angles (if there are 2 or more) or just a diagonal anchored at a reflex angle (if there is just 1) or a diagonal anywhere (if it is convex) will cover the shape.</p>
 
 <p>Finally, we establish the induction step. We must show that for any polygon P with more than 9 vertices, its triangulation graph partitions it into two pieces, one of which contains k = 5, 6, 7, or 8 arcs corresponding to edges of P.</p>
 
