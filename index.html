@@ -99,19 +99,21 @@
 
 <p>Next we establish that n/4 guards are sufficient for values of n between 4 and 10. With n values this small, it is easy to see that the number of possible triangulations is small, and they all guarantee that one or two guards are sufficient. Below I present two of the cases as samples.</p>
 
-<h6>n = 5</h6>
+<h4>n = 5</h4>
+
 <p>There are only 5 distinct triangulations of a polygon with n vertices, and only one reflex angle is possible. With a convex polygon, obviously one guard works. For a polygon with a reflex angle, placing one endpoint at the reflex angle gives a one-guard covering.</p>
 
-<h6>n = 7</h6>
+<h4>n = 7</h4>
+
 <p>Let d be an arbitrary internal diagonal. Then this partitions the edges into either 2+5 or 3+4. In either case, a diagonal between any two reflex angles (if there are 2 or more) or just a diagonal anchored at a reflex angle (if there is just 1) or a diagonal anywhere (if it is convex) will cover the shape.</p>
 
-<p>Finally, we establish the induction step. We must show that for any polygon P with more than 9 vertices, its triangulation graph partitions it into two pieces, one of which contains k = 5, 6, 7, or 8 arcs corresponding to edges of P.</p>
+<p>Finally, we establish the induction step. We must show that for any polygon P with 10 or more vertices, its triangulation graph partitions it into two pieces, one of which contains k = 5, 6, 7, or 8 arcs corresponding to edges of P.</p>
 
 <img src="Diagonal.png"></img>
 
 <p>To prove this, choose a diagonal d of T (shown above) that separates off a minimum number of polygon edges that is at least 5. The diagonal supports a triangle (that by definition is part of T) whose apex is between vertices 0 and k. Since k is minimal, t must be at least 4 and k-t must be less than or equal to 4. Adding these together, we see that k must be less than or equal to 8. So we can split off 8 vertices from the triangulation.</p>
 
-<p>With this result, the rest of the proof is just case analysis of values of k between 5 and 8, showing that each value of k can be guarded with at most n/4 guards.</p>
+<p>With the base cases, we established the theorem for n=5 through n=9, so assume that n is at least 10 and the theorem hold for n' less than n. Now for every n' we are guaranteed a diagonal that splits off a small number k of edges, that can be triangulated with n'/4 guards. In our edge contracting section, we showed that adding an additional triangle only increased the guard requirements by 1 vertex. So we have established the induction step.</p>
 
 </div>
 
