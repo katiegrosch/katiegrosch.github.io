@@ -1,138 +1,80 @@
+<!DOCTYPE html>
 <html>
+<head>
+<style>
+div.container {
+    width: 100%;
+    border: 1px solid gray;
+}
 
-<script src="processing.min.js"></script>
+header, footer {
+    padding: 1em;
+    color: white;
+    background-color: black;
+    clear: left;
+    text-align: center;
+}
 
+nav {
+    float: left;
+    max-width: 160px;
+    margin: 0;
+    padding: 1em;
+}
+
+article {
+    margin-left: 170px;
+    border-left: 1px solid gray;
+    padding: 1em;
+    overflow: hidden;
+}
+</style>
+</head>
 <body>
-<div id="header">
-<h1>Moving Guards in an Art Gallery</h1>
-</div>
 
-<div id="intro">
-<p>Here I will explain the art gallery problem - that is, using a set of points whose visibility region completely covers a polygon. I will then look at the extension of using mobile guards to reduce the number necessary to cover the gallery.</p>
+<div class="container">
 
-<p>Much of this material comes from Joseph O'Rourke's book Art Gallery Theorems and Algorithms (Oxford University Press 1987). Click <a href="http://cs.smith.edu/~orourke/books/ArtGalleryTheorems/art.html">here</a> to read his full text. His mobile guards section is in <a href="http://cs.smith.edu/~orourke/books/ArtGalleryTheorems/Art_Gallery_Chapter_3.pdf">Chapter Three</a></p>
-</div>
+<header>
+   <h1>Question about something? Nithiya is here for you!</h1>
+</header>
+  
+<nav>
+<img src="https://supportcentral.gecdn.com/images/person/temp/212356812.jpg" height="100" width="100">
+</nav>
 
-<div id="explanation">
-<h1>The Art Gallery Problem</h1>
-<p>The art gallery problem is a well-studied problem in computational geometry. In the general case of the art gallery problem, points (guards) are placed in stationary position throughout a simple polygon (an art gallery). The problem is how many guards you need and where to put them to achieve full coverage of the region.</p>
+<article>
+<form id="questionForm" action="">
+Ask Nithiya a question:
+<input type="text" name="question">
+<input type="button" onclick="getAnswer()" value="Ask!">
+</form>
 
-<p>Below, we can see two examples: in Example 1, the art gallery is completely coverd by the guards. Every point in the art gallery can be seen by one of more of the guards A, B, and C, and D.</p>
+<p id="answer"></p>
 
-<p>In Example 2, the art gallery is not covered. The yellow point is not in the visibility region of any guard. In fact, any point that is outside of the red and pink colored regions is invisible to both guards.</p>
+</article>
 
-<p>You can think of the visibility region of a guard as the collection of all points in the polygon where you can draw a line between the point and the guard, and have that line be completely contained within the polygon.</p>
-
-<img src="VisibilityRegion.png"></img>
-<img src="InVisibilityRegion.png"></img>
-
-<h1>Moving Guards</h1>
-<p>In this variant of the art gallery problem, we modify the power of the guard. Each guard is permitted to "patrol" an interior line segment.</p>
-<p>Let s be a line segment completely contained in the polygon. Then a point p in the polygon is said to be seen by s (covered by s) if there is a point x on the line such that the segment xp is completely contained in the polygon. Below is an art gallery completely covered by two mobile guards. In this example, three stationary guards would be needed, but only two mobile guards can do the job.</p>
-
-<img src="Stationary.png"></img>
-<img src="Movement.png"></img>
-
-<p>Mobile guards are more powerful than stationary guards: only three-quarters as many are needed in the worst case, in both general and orthogonal polygons. Below, you can see that the the second column is 3/4 times the first. Moreover, orthogonal polygons are three-quarters easier to cover than general polygons: the second row is 3/4 times the first.</p>
-</div>
-
-<div id="table">
-<h4>Number of Guards Necessary</h4>
-<table border="1">
-<tr>
-<th></th>
-<th>Stationary</th>
-<th>Mobile</th>
-</tr>
-<tr>
-<th>General</th>
-<td>n/3</td>
-<td>n/4</td>
-</tr>
-<tr>
-<th>Orthogonal</th>
-<td>n/4</td>
-<td>(3n+4)/16</td>
-</tr>
-</table>
-</div>
-
-<div id="proofs">
-<h1>Proof of the n/4 upper bound</h1>
-
-<p>Before I go into the n/4 bound, it's helpful to get some intuition about the n/3 bound for stationary guards. Steve Fisk proved this with a three-coloring argument: The polygon is triangulated, and the vertices are three-colored. Then, any color subset of the guards forms a valid guard set, hence, choosing the color set with the fewest appearences in the triangulation gives the n/3 bound. </p>
-
-<p>As far as n/3 guards being necessary, the below picture gives a worst-case scenario where we need that many guards to cover the shape.</p>
-
-<img src="Necessary2.png"></img>
-
-<p>We want to show that n/4 is the upper bound for the number of mobile guards necessary to cover a polygon. First we will show that n/4 guards are necessary, and then we will prove that it is sufficient.</p>
-
-<h4>Necessary</h4>
-<p>This is actually the easy part of the proof, and it defines how many guards we need in the worst case. The picture below gives a polygon where n/4 mobile guards are necessary to cover the area, because we can't do it with any fewer.</p>
-
-<img src="Necessary.png"></img>
-
-<h4>Sufficient</h4>
-
-<p>Proving that n/4 guards suffice is an inductive proof. Basically, what we do is show that n/4 guards suffices if a guard's path can only be along a diagonal of the triangulation graph T of the polygon. Since these triangulation diagonal guards are special cases of diagonal guards, and diagonal guards are special cases of line guards, we have the n/4 bound for any moving guards.</p>
-
-<p>First we need to establish a basic manipulation of our art gallery called an edge contraction. The contraction of an edge in the art gallery alters its triangulation graph. It takes the two endpoints of the edge we're contracting and "squashes" them together into one node.</p>
-
-<p>Below, you can see a triangulation graph T of a polygon P. In the next three pictures, we "squash" edge e. The new triangulation, T', is the triangulation of some polygon P'.</p>
-
-<img src="Squashing2.png"></img>
-<img src="Squashing.png"></img>
-
-<p>Now we have the new triangulation, T'.</p>
-
-<img src="Squashing3.png"></img>
-
-<p>Now, suppose we place a guard on a triangulation diagonal of P so that one of his path endpoints is at an endpoint of e. Then that edge can be squashed out for guard coverage calculations. More formally, if f(n) triangulation diagonal guards are sufficient for an n-node triangulation, then a guard placed at an endpoint of an edge e means you only need f(n-1) guards to guard the rest of the polygon.</p>
-
-<p>Here's why that works. Suppose we edge-contract the edge e in the triangulation T below. Now the new graph T' has n-1 vertices. This new graph must be the triangulation graph of some polygon P' with n-1 vertices. </p>
-
-<img src="T.png"></img>
-<img src="ContractedT.png"></img>
-
-<p>Let x be the node that replaced edge e. Suppose no guard is placed at x in T'. Then the same guard placements will dominate T' that worked for T, since the guard at u in the untriangulated version dominated the triangle with edge e, and the remaining triangles have dominated versions in T'.</p>
-
-<p>Next we establish that n/4 guards are sufficient for values of n between 4 and 10. With n values this small, it is easy to see that the number of possible triangulations is small, and they all guarantee that one or two guards are sufficient. Below I present two of the cases as samples.</p>
-
-<h4>n = 5</h4>
-
-<p>There are only 5 distinct triangulations of a polygon with n vertices, and only one reflex angle is possible. With a convex polygon, obviously one guard works. For a polygon with a reflex angle, placing one endpoint at the reflex angle gives a one-guard covering.</p>
-
-<h4>n = 7</h4>
-
-<p>Let d be an arbitrary internal diagonal. Then this partitions the edges into either 2+5 or 3+4. In either case, a diagonal between any two reflex angles (if there are 2 or more) or just a diagonal anchored at a reflex angle (if there is just 1) or a diagonal anywhere (if it is convex) will cover the shape.</p>
-
-<p>Finally, we establish the induction step. We must show that for any polygon P with 10 or more vertices, its triangulation graph partitions it into two pieces, one of which contains k = 5, 6, 7, or 8 arcs corresponding to edges of P.</p>
-
-<img src="Diagonal.png"></img>
-
-<p>To prove this, choose a diagonal d of T (shown above) that separates off a minimum number of polygon edges that is at least 5. The diagonal supports a triangle (that by definition is part of T) whose apex is between vertices 0 and k. Since k is minimal, t must be at least 4 and k-t must be less than or equal to 4. Adding these together, we see that k must be less than or equal to 8. So we can split off 8 vertices from the triangulation.</p>
-
-<p>With the base cases, we established the theorem for n=5 through n=9, so assume that n is at least 10 and the theorem hold for n' less than n. Now for every n' we are guaranteed a diagonal that splits off a small number k of edges, that can be triangulated with n'/4 guards. In our edge contracting section, we showed that adding an additional triangle only increased the guard requirements by 1 vertex. So we have established the induction step.</p>
+<footer>Disclaimer: These aren't actual answers. Obviously.</footer>
 
 </div>
 
-<div id="app">
-<h1>Set Your Own Guards</h1>
-<p>Use the application below to see what different guarding patterns would look like.</p>
-<p>Click to start building a polygon, and hit the space bar when you're done. Then, build guard paths by clicking where you want the endpoints of the patrol routes.</p>
+<script>
 
-<p>Usage note: When you hit the space bar to finish the polygon, it will only close and fill in if the last line segment doesn't intersect any of the others (making a non-simple polygon. If finishing the polygon would make it non-simple, it just lets you keep making points. However, it doesn't currently check if any of the other edges make the polygon non-simple, so just don't do that.</p>
+var answersArray = ["I'll put some materials on Box.",
+          "Let's schedule some time to talk about this.",
+                    "That's a whole different meeting.",
+                    "I'll have to talk to Yonatan about that.",
+                    "They're deciding that right now.",
+                    "That's an ongoing process.",
+                    "",
+                    "",
+                    "",
+                    ""];
 
-<canvas data-processing-sources="ArtGalleryApp/ArtGalleryApp.pde"></canvas>
-</div>
-
-<div id="footer">
-<br>
-Katie Grosch<br>
-Tufts Comp 163 Final Project<br>
-</div>
+function getAnswer() {
+  var x = Math.floor(Math.random() * 10);
+    document.getElementById("answer").innerHTML = answersArray[x];
+}
+</script>
 
 </body>
-
 </html>
