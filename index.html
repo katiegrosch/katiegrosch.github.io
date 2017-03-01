@@ -45,7 +45,7 @@ article {
 <article>
 <form id="questionForm" action="">
 Ask Nithiya a question:
-<input type="text" name="question">
+<input type="text" id="question">
 <input type="button" onclick="getAnswer()" value="Ask!">
 </form>
 
@@ -70,8 +70,8 @@ var answersArray = ["I'll put some materials on Box.",
                     "We should start having weekly happy hours at the Firehouse!",
                     "Let's focus on the EVP accounts instead."];
 
-var wage = document.getElementById("question");
-wage.addEventListener("keydown", function () {
+var questionEnter = document.getElementById("question");
+questionEnter.addEventListener("keydown", function (e) {
     if (e.keyCode === 13) {  //checks whether the pressed key is "Enter"
         getAnswer();
     }
