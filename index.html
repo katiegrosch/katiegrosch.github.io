@@ -43,9 +43,8 @@ article {
 </nav>
 
 <article>
-<form id="questionForm" action="">
 Ask Nithiya a question:
-<input type="text" id="name">
+<input type="text" id="questionForm">
 <input type="button" onclick="getAnswer()" value="Ask!">
 </form>
 
@@ -73,7 +72,10 @@ var answersArray = ["I'll put some materials on Box.",
 var questionEnter = document.getElementById("questionForm");
 questionEnter.addEventListener("keydown", function (e) {
     if (e.keyCode === 13) {  //checks whether the pressed key is "Enter"
+           
+
         getAnswer();
+         document.getElementById("questionForm").clear();
     }
 });
 
