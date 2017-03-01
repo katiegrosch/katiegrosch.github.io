@@ -63,16 +63,16 @@ var answersArray = ["I'll put some materials on Box.",
           "Let's schedule some time to talk about this.",
                     "That's a whole different meeting.",
                     "I'll have to talk to Yonatan about that.",
-                    "They're deciding that right now.",
+                    "They're deciding that right now. Hopefully we should know in a couple weeks.",
                     "That's an ongoing process.",
-                    "",
-                    "",
-                    "",
-                    ""];
+                    "We can touch base about that another time.",
+                    "I have heard that Brilliant Manufacturing is working on that right now.",
+                    "We should start having weekly happy hours at the Firehouse!",
+                    "Let's focus on the EVP accounts instead."];
 
 function getAnswer() {
   var x = Math.floor(Math.random() * 10);
-    document.getElementById("answer").innerHTML = answersArray[x];
+    document.getElementById("answer").innerHTML = "Nithiya says: " + answersArray[x];
 }
 </script>
 
